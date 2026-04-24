@@ -1,8 +1,9 @@
 {
   "name": "vite-tauri-template",
-  "private": true,
-  "version": "0.1.0",
+  "private": false,
+  "version": "0.0.0",
   "type": "module",
+  "author": "Ni But Crazy",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
