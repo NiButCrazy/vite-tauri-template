@@ -1,0 +1,161 @@
+import viteLogo from './assets/images/vite.svg'
+import reactLogo from './assets/images/react.svg'
+import heroImg from './assets/images/hero.png'
+import unocssLogo from './assets/images/unocss.svg'
+import routerImg from './assets/images/router.png'
+import zustandImg from './assets/images/zustand.ico'
+import immerImg from './assets/images/immer.ico'
+import Icons from './assets/images/icons.svg'
+import tauriLogo from './assets/images/tauri.svg'
+import { Button, GreetButton } from '@components/buttons'
+import { useRef, useState } from 'react'
+import { invoke } from "@tauri-apps/api/core"
+
+
+export default function Home() {
+  const [greetMsg, setGreetMsg] = useState("解锁新世界");
+  const [ count, setCount ] = useState(0)
+
+  async function greet() {
+    setGreetMsg(await invoke("greet", { count }));
+  }
+
+
+  return (
+    <>
+      <section id="center">
+        <div className="hero">
+          <img src={ heroImg } className="base" width="170" height="179" alt="" />
+          <img src={ viteLogo } className="vite" alt="Vite logo" />
+          <img src={ tauriLogo } className="tauri" alt="tauri logo" />
+        </div>
+        <div>
+          <h1>{ greetMsg }</h1>
+          <p>
+            编辑 <code>src/main.tsx</code> 然后保存来测试 <code>HMR</code>
+          </p>
+        </div>
+        <div className='flex gap-2'>
+          <Button count={ count } setCount={ setCount }/>
+          <GreetButton onClick={ greet }/>
+        </div>
+      </section>
+
+      <div className="ticks"></div>
+
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href={ Icons + '#documentation-icon' }></use>
+          </svg>
+          <h2>魔法手册</h2>
+          <p>问出好奇，收获惊喜</p>
+          <ul>
+            <li>
+              <a href="https://cn.vite.dev/" target="_blank">
+                <img className="logo" src={ viteLogo } alt="" />
+                探索 Vite
+              </a>
+            </li>
+            <li>
+              <a href="https://tauri.org.cn/" target="_blank">
+                <img className="button-icon" src={ tauriLogo } alt="" />
+                拥抱 Tauri
+              </a>
+            </li>
+            <li>
+              <a href="https://zh-hans.react.dev/" target="_blank">
+                <img className="button-icon" src={ reactLogo } alt="" />
+                学习 React
+              </a>
+            </li>
+            <li>
+              <a href="https://unocss.nodejs.cn" target="_blank">
+                <img className="button-icon" src={ unocssLogo } alt="" />
+                了解 UnoCSS
+              </a>
+            </li>
+            <li>
+              <a href="https://immerjs.github.io/immer/zh-CN/example-setstate" target="_blank">
+                <img className="button-icon" src={ immerImg } alt="" />
+                Immer
+              </a>
+            </li>
+            <li>
+              <a href="https://ouweiya.github.io/zustand-zh" target="_blank">
+                <img className="button-icon" src={ zustandImg } alt="" />
+                Zustand
+              </a>
+            </li>
+            <li>
+              <a href="https://reactrouter.remix.org.cn/home" target="_blank">
+                <img className="button-icon" src={ routerImg } alt="" />
+                React Router
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href={ Icons + '#social-icon' }></use>
+          </svg>
+          <h2>想法连线中</h2>
+          <p>加入 Vite 社区</p>
+          <ul>
+            <li>
+              <a href="https://github.com/vitejs/vite" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href={ Icons + '#github-icon' }></use>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://chat.vite.dev/" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href={ Icons + '#discord-icon' }></use>
+                </svg>
+                Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/vite_js" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href={ Icons + '#x-icon' }></use>
+                </svg>
+                X.com
+              </a>
+            </li>
+            <li>
+              <a href="https://bsky.app/profile/vite.dev" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href={ Icons + '#bluesky-icon' }></use>
+                </svg>
+                Bluesky
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
+}
