@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 
 
 interface ButtonProps extends ComponentProps<'button'>{
@@ -6,8 +6,8 @@ interface ButtonProps extends ComponentProps<'button'>{
   setCount: (count: number) => void
 }
 
-function Button(props: ButtonProps) {
-  const { count, setCount, children, ...prop } = props
+function Button(_props: ButtonProps) {
+  const { count, setCount, children, ...props } = _props
 
   function handleClick(e: EventFor<'button', 'onClick'>) {
     setCount(count + 1)
@@ -17,7 +17,7 @@ function Button(props: ButtonProps) {
   return (
     <button className={
       'button1'
-    } onClick={ handleClick } { ...prop } >
+    } onClick={ handleClick } { ...props } >
       { children ?? `计数器为 ${ count }` }
     </button>
   )

@@ -1,13 +1,13 @@
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 
 
-function GreetButton(props: ComponentProps<'button'>) {
-  const { children, onClick, ...prop } = props
+function GreetButton(_props: ComponentProps<'button'>) {
+  const { children, onClick, ...props } = _props
 
   return (
     <button className={
       'button1'
-    } onClick={ onClick } { ...prop } >
+    } onClick={ onClick } { ...props } >
       { children ?? `打个招呼吧` }
     </button>
   )
