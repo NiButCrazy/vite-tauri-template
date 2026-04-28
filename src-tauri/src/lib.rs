@@ -9,7 +9,6 @@ fn greet(count: i32) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             // 由于 create 设置为 false，则需要手动从配置中创建窗口
             let handle = app.handle();
@@ -31,15 +30,20 @@ pub fn run() {
                     .data_directory(data_path)
                     .browser_extensions_enabled(true)
                     .extensions_path(ext_path)
-                    .build()?;
+                    .build()?
+                    // 打开 devtools
+                    .open_devtools()
+
             }else {
                 // 生产环境下使用默认窗口
                 WebviewWindowBuilder::from_config(handle, main_window_config)?.build()?;
             }
 
             Ok(())
-            
+
         })
+        // 打开文件或者链接
+        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
         .expect("在运行 Tauri 应用进程时出现了错误");
