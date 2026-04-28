@@ -9,9 +9,10 @@
 pnpm i
 
 # Tauri 常规开发模式
+# Windows 平台自带 React Devtools 扩展辅助开发
 pnpm tauri dev
 
-# Tauri 连接 React Devtools 开发模式
+# Tauri 连接「React Devtools 独立版」开发模式
 pnpm dev+
 
 # 应用构建
@@ -20,6 +21,9 @@ pnpm tauri build
 ```
 
 ## 配置 React Devtools
+
+> [!TIP]
+> Windows 平台无需配置，因为我在模板里塞了自己汉化的 React Devtools
 
 1. 安装 React Devtools 独立版
 
@@ -64,3 +68,9 @@ pnpm dev+
   - Eslint - React Hooks 与 Refresh 静态代码检查
 
 ![示例图](./website/screenshots/img.png)
+
+
+
+### Windows 平台使用 React Devtools 扩展辅助开发
+
+![示例图](/website/screenshots/img2.png)

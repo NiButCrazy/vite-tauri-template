@@ -10,7 +10,7 @@ const host = process.env.TAURI_DEV_HOST;
 // https://cn.vite.dev/config/
 export default defineConfig({
   plugins: [
-    // 动态加载 react devtools
+    // 动态加载 「react devtools 独立版」所需的脚本
     {
       name: 'inject-react-devtools',
       transformIndexHtml(html) {
@@ -45,7 +45,7 @@ export default defineConfig({
       '@components': resolve(__dirname, './src/components'),
       '@utils': resolve(__dirname, './src/utils'),
       '@shared': resolve(__dirname, './src/shared'),
-      '@hooks': resolve(__dirname, './src/global')
+      '@hooks': resolve(__dirname, './src/hooks')
     }
   },
 

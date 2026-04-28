@@ -1,0 +1,30 @@
+<script src="shared.js"></script>
+<link rel="stylesheet" href="shared.css" />
+<style>
+  html, body {
+    min-width: 460px;
+    min-height: 133px;
+  }
+
+  hr {
+    width: 100%;
+  }
+</style>
+<p>
+  <b>本页面包含一个额外的 React 开发版构建 ?</b>
+</p>
+<p>
+  本页面中的 React 构建同时包含了开发版本和生产版本，因为未正确应用无效代码消除（dead code elimination）。
+  <br />
+  <br />
+  这会导致文件体积变大，并使 React 运行速度变慢。
+  <br />
+  <br />
+  请确保在部署之前
+  <a href="https://reactjs.org/docs/optimizing-performance.html#use-the-production-build">设置无效代码消除</a>。
+</p>
+<hr />
+<p>
+  打开浏览器的开发者工具，右侧会显示 "Components" 和 "Profiler" 标签页。
+</p>
+
