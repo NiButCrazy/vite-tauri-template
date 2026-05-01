@@ -14,7 +14,7 @@ pnpm tauri dev
 # [最兼容] Tauri 连接「React Devtools 独立版」开发模式 
 pnpm tauri:dev    # 需额外配置 React Devtools
 
-# [最真实] Tauri 窗口直接加载内置的的「汉化版 React Devtools 」扩展
+# [最真实] Tauri 窗口直接加载内置的的「汉化版 React Devtools」扩展
 pnpm tauri:ext    # 仅 Windows 平台
 
 # [最丰富] Tauri 在外部浏览器中注入 Tauri API，利用浏览器扩展达到近乎完美的前端开发
