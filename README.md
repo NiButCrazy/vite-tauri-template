@@ -9,11 +9,14 @@
 pnpm i
 
 # Tauri 常规开发模式
-# Windows 平台自带 React Devtools 扩展辅助开发
 pnpm tauri dev
 
-# Tauri 连接「React Devtools 独立版」开发模式
-pnpm dev+
+# [最兼容] Tauri 连接「React Devtools 独立版」开发模式 
+pnpm tauri:dev  # 需额外配置 React Devtools
+# [最真实] Tauri 窗口直接加载内置的的「汉化版 React Devtools 」扩展
+pnpm tauri:ext  # 仅 Windows 平台
+# [最丰富] Tauri 在外部浏览器中注入 Tauri API，利用浏览器扩展达到近乎完美的前端开发
+pnpm tauri:web  # 浏览器打开 localhost:1420 进行开发
 
 # 应用构建
 pnpm tauri build
@@ -21,9 +24,8 @@ pnpm tauri build
 ```
 
 ## 配置 React Devtools
-
 > [!TIP]
-> Windows 平台无需配置，因为我在模板里塞了自己汉化的 React Devtools
+> 仅需使用 `pnpm tauri:dev` 时配置
 
 1. 安装 React Devtools 独立版
 
@@ -46,7 +48,7 @@ react-devtools
 3. 启动特殊 Tauri 开发模式
 
 ```shell
-pnpm dev+
+pnpm tauri:dev
 ```
 
 ### 第三方库

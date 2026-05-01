@@ -8,7 +8,11 @@ fn greet(count: i32) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    tauri::Builder::default() 
+        // 打开文件或者链接
+        .plugin(tauri_plugin_opener::init())
+        // 允许外部浏览器通过 HTTP 调用 Tauri 命令
+        .plugin(tauri_plugin_dev_invoke::init())
         .setup(|app| {
             // 由于 create 设置为 false，则需要手动从配置中创建窗口
             let handle = app.handle();
@@ -19,14 +23,20 @@ pub fn run() {
             #[cfg(debug_assertions)]
             {
                 use ::tauri::Manager;
-                // 检测是否为 pnpm dev+ 模式，这将启动默认窗口来连接 react devtools 独立版
-                if !std::env::var("TAURI_DEVTOOLS").is_ok() {
+                // 检测是否为 pnpm tauri:dev 模式，这将启动默认窗口来连接 react devtools 独立版
+                let is_react_devtools = std::env::var("VITE_REACT_DEVTOOLS").is_ok();
+                // 检测是否为 pnpm tauri:web 模式，这将在浏览器中注册 Tauri API
+                let is_web_invoke = std::env::var("TAURI_ENV_WEB_INVOKE").is_ok();
+                // 检测是否为 pnpm tauri:ext 模式，这将使 webview2 加载 react devtools 扩展
+                let is_extension = std::env::var("TAURI_ENV_EXTENSION").is_ok();
+
+                if is_extension {
                     // 开发模式下 webview 使用自定义数据目录，否则无法加载扩展
                     let data_path = app.path().app_data_dir().unwrap().join(".dev");
                     // 指定加载扩展的根路径
                     let ext_path = std::env::current_dir().unwrap().join("extensions");
-
                     // 创建具备加载扩展能力的窗口
+                    // 注意：创建完窗口后需要手动刷新一次页面才能正常显示扩展，和 electron 一样吃大份
                     WebviewWindowBuilder::from_config(handle, main_window_config)?
                         .data_directory(data_path)
                         .browser_extensions_enabled(true)
@@ -35,7 +45,9 @@ pub fn run() {
                         .open_devtools();
                 } else {
                     // 无加载扩展的默认窗口
-                    WebviewWindowBuilder::from_config(handle, main_window_config)?.build()?;
+                    let webview = WebviewWindowBuilder::from_config(handle, main_window_config)?.build()?;
+                    if is_react_devtools {webview.open_devtools();}
+                    if is_web_invoke {webview.minimize()?;}
                 }
             }
 
@@ -45,8 +57,6 @@ pub fn run() {
 
             Ok(())
         })
-        // 打开文件或者链接
-        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![greet])
         .run(tauri::generate_context!())
         .expect("在运行 Tauri 应用进程时出现了错误");
