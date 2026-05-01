@@ -6,7 +6,8 @@ import { invoke as __TAURI_INVOKE } from "@tauri-apps/api/core";
 export const commands = {
 	/**
 	 *  用于向前端返回计数器数据
-	 *  - count 输入的数字
+	 * 
+	 *  @param count 输入的数字
 	 */
 	greet: (count: number) => __TAURI_INVOKE<string>("greet", { count }),
 };

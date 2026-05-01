@@ -3,9 +3,10 @@ use tauri::webview::WebviewWindowBuilder;
 use tauri_specta::{collect_commands, Builder};
 
 #[tauri::command]
-#[specta::specta] // 这个注释必须加
+#[specta::specta] // <- 这个注释必须加
 /// 用于向前端返回计数器数据
-/// - count 输入的数字
+///
+/// @param count 输入的数字
  fn greet(count: i32) -> String {
     format!("你好 Rust！后台计数器为 {}", count)
 }
