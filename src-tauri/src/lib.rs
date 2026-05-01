@@ -1,13 +1,28 @@
 // 详情请见 https://tauri.app/develop/calling-rust/
 use tauri::webview::WebviewWindowBuilder;
+// Typescript 类型导出
+use specta_typescript::Typescript;
+use tauri_specta::{collect_commands, Builder};
 
 #[tauri::command]
-fn greet(count: i32) -> String {
+#[specta::specta] // 这个注释必须加
+/// 用于向前端返回计数器数据
+/// - count 输入的数字
+ fn greet(count: i32) -> String {
     format!("你好 Rust！后台计数器为 {}", count)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    let builder = Builder::<tauri::Wry>::new()
+        // 收集所需的命令
+        .commands(collect_commands![greet,]);
+
+    #[cfg(debug_assertions)]
+    builder
+        .export(Typescript::default(), "../src/utils/command.ts")
+        .expect("Failed to export typescript bindings");
+
     tauri::Builder::default() 
         // 打开文件或者链接
         .plugin(tauri_plugin_opener::init())
@@ -57,7 +72,7 @@ pub fn run() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(builder.invoke_handler())
         .run(tauri::generate_context!())
         .expect("在运行 Tauri 应用进程时出现了错误");
 }

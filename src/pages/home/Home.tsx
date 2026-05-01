@@ -8,8 +8,8 @@ import immerImg from './assets/images/immer.ico'
 import Icons from './assets/images/icons.svg'
 import tauriLogo from './assets/images/tauri.svg'
 import { Button, GreetButton } from '@components/buttons'
-import { useRef, useState } from 'react'
-import { invoke } from "@tauri-apps/api/core"
+import { useState } from 'react'
+import { commands } from "@utils/command"
 
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
   const [ count, setCount ] = useState(0)
 
   async function greet() {
-    setGreetMsg(await invoke("greet", { count }));
+    setGreetMsg(await commands.greet(count));
   }
 
 
