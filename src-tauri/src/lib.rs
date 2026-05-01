@@ -1,7 +1,5 @@
 // 详情请见 https://tauri.app/develop/calling-rust/
 use tauri::webview::WebviewWindowBuilder;
-// Typescript 类型导出
-use specta_typescript::Typescript;
 use tauri_specta::{collect_commands, Builder};
 
 #[tauri::command]
@@ -14,14 +12,20 @@ use tauri_specta::{collect_commands, Builder};
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    // invoke 绑定器
     let builder = Builder::<tauri::Wry>::new()
         // 收集所需的命令
         .commands(collect_commands![greet,]);
 
     #[cfg(debug_assertions)]
-    builder
-        .export(Typescript::default(), "../src/utils/command.ts")
-        .expect("Failed to export typescript bindings");
+    {
+        // Typescript 类型导出
+        use specta_typescript::Typescript;
+        builder
+            .export(Typescript::default(), "../src/utils/command.ts")
+            .expect("Failed to export typescript bindings");
+    }
+    
 
     tauri::Builder::default() 
         // 打开文件或者链接
