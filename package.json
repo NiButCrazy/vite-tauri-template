@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "preinstall": "npx only-allow pnpm",
     "tauri": "tauri",
     "tauri:dev": "cross-env VITE_REACT_DEVTOOLS=1 tauri dev",
     "tauri:ext": "cross-env TAURI_ENV_EXTENSION=1 tauri dev",
