@@ -1,4 +1,5 @@
-// 详情请见 https://tauri.app/develop/calling-rust/
+// 中文文档 https://tauri.org.cn/
+// 详情请见 https://tauri.app/zh-cn/develop/calling-rust/
 use tauri::webview::WebviewWindowBuilder;
 use tauri_specta::{collect_commands, Builder};
 

@@ -10,7 +10,7 @@ const host = process.env.TAURI_DEV_HOST;
 // https://cn.vite.dev/config/
 export default defineConfig({
   plugins: [
-    // 动态加载 「react devtools 独立版」所需的脚本
+    // 动态加载「react devtools 独立版」所需的脚本
     {
       name: 'inject-react-devtools',
       transformIndexHtml(html) {
@@ -67,7 +67,7 @@ export default defineConfig({
         }
       : undefined,
     watch: {
-      // 3. tell Vite to ignore watching `src-tauri`
+      // 3. 告诉 vite 忽略监听 `src-tauri`
       ignored: ["**/src-tauri/**"],
     },
   },
