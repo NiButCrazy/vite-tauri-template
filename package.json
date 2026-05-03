@@ -1,6 +1,6 @@
 {
   "name": "vite-tauri-template",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "author": "Ni But Crazy",
   "scripts": {
@@ -12,9 +12,10 @@
     "tauri:dev": "cross-env VITE_REACT_DEVTOOLS=1 tauri dev",
     "tauri:ext": "cross-env TAURI_ENV_EXTENSION=1 tauri dev",
     "tauri:web": "cross-env TAURI_ENV_WEB_INVOKE=1 tauri dev",
-    "doc:tauri": "cargo doc --manifest-path src-tauri/Cargo.toml --open --no-deps",
-    "version": "pnpm version:sync && git cliff && git add CHANGELOG.md",
-    "version:sync": "node ./scripts/version.ts"
+    "doc:tauri": "cd src-tauri && cargo doc --open --no-deps",
+    "version": "pnpm version:sync && git add src-tauri/Cargo.toml src-tauri/Cargo.lock && pnpm changelog",
+    "version:sync": "node ./scripts/version.ts && cd src-tauri && cargo check --offline",
+    "changelog": "git cliff && git add CHANGELOG.md"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
