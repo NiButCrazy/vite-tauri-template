@@ -23,6 +23,11 @@ pnpm tauri:web    # 浏览器打开 localhost:1420 进行开发
 # 应用构建
 pnpm tauri build
 
+# 版本自增
+# 内置 script 脚本，可同时更新 cargo.toml
+pnpm version `major | minor | patch`
+# ↑↑↑
+# 默认使用 git-cliff 生成日志，不喜欢可以把这段命令行删了
 ```
 
 ## 配置 React Devtools

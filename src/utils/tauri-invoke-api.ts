@@ -12,6 +12,7 @@ declare global {
 */
 export function setupDevInvoke(httpEndpoint = "http://localhost:3030") {
 
+  // 如果不是 TAURI_ENV_WEB_INVOKE 环境，那就什么都别做
   if (!import.meta.env.TAURI_ENV_WEB_INVOKE) {
     return;
   }

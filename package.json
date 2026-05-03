@@ -13,7 +13,8 @@
     "tauri:ext": "cross-env TAURI_ENV_EXTENSION=1 tauri dev",
     "tauri:web": "cross-env TAURI_ENV_WEB_INVOKE=1 tauri dev",
     "doc:tauri": "cargo doc --manifest-path src-tauri/Cargo.toml --open --no-deps",
-    "version": "git cliff && git add CHANGELOG.md"
+    "version": "version:sync && git cliff && git add CHANGELOG.md",
+    "version:sync": "node ./scripts/version.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
