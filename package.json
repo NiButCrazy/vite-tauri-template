@@ -1,6 +1,6 @@
 {
   "name": "vite-tauri-template",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "type": "module",
   "author": "Ni But Crazy",
   "scripts": {
