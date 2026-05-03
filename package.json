@@ -1,7 +1,6 @@
 {
   "name": "vite-tauri-template",
-  "private": false,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "author": "Ni But Crazy",
   "scripts": {
@@ -23,6 +22,7 @@
     ]
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.169.1",
     "@tauri-apps/api": "^2.10.1",
     "@tauri-apps/plugin-opener": "^2.5.3",
     "@unocss/reset": "^66.6.8",
@@ -30,11 +30,12 @@
     "immer": "^11.1.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-router": "^7.14.2",
     "use-immer": "^0.11.0",
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@tanstack/react-router-devtools": "^1.166.13",
+    "@tanstack/router-plugin": "^1.167.32",
     "@rolldown/plugin-babel": "^0.2.3",
     "@tauri-apps/cli": "^2.10.1",
     "@types/node": "^24.12.2",

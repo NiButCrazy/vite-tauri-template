@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
 import babel from '@rolldown/plugin-babel'
@@ -26,6 +27,10 @@ export default defineConfig({
         return html;
       },
     },
+    // tanstack router 自动生成器
+    tanstackRouter({ target: 'react', autoCodeSplitting: true, 
+      generatedRouteTree: "./src/routes/-routes.tree.ts" 
+    }),
     UnoCSS(),
     react(),
     babel({
