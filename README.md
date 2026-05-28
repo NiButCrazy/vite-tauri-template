@@ -10,7 +10,7 @@ npm create nbc-app < projectName | 可选 >
 # pnpm create nbc-app < projectName | 可选 >
 ```
 
-## 安装使用
+## 开发调试
 
 ```shell
 # 下载依赖
