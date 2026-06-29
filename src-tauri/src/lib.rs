@@ -29,7 +29,7 @@ pub fn run() {
     }
     
 
-    tauri::Builder::default() 
+    tauri::Builder::default()
         // 打开文件或者链接
         .plugin(tauri_plugin_opener::init())
         // 允许外部浏览器通过 HTTP 调用 Tauri 命令
@@ -52,10 +52,13 @@ pub fn run() {
                 let is_extension = std::env::var("TAURI_ENV_EXTENSION").is_ok();
 
                 if is_extension {
+                    // 修复自启动时工作目录错误导致找不到扩展文件的问题
+                    let exe_dir = std::env::current_exe().unwrap().parent().unwrap().to_path_buf();
+                    std::env::set_current_dir(&exe_dir).ok();
+                    // 指定加载扩展的根路径
+                    let ext_path = exe_dir.join("extensions");
                     // 开发模式下 webview 使用自定义数据目录，否则无法加载扩展
                     let data_path = app.path().app_data_dir().unwrap().join(".dev");
-                    // 指定加载扩展的根路径
-                    let ext_path = std::env::current_dir().unwrap().join("extensions");
                     // 创建具备加载扩展能力的窗口
                     // 注意：创建完窗口后需要手动刷新一次页面才能正常显示扩展，和 electron 一样吃大份
                     WebviewWindowBuilder::from_config(handle, main_window_config)?

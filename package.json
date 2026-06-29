@@ -17,12 +17,6 @@
     "version:sync": "node ./scripts/version.ts && cd src-tauri && cargo check --offline",
     "changelog": "git cliff && git add CHANGELOG.md"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "electron",
-      "esbuild"
-    ]
-  },
   "dependencies": {
     "@tanstack/react-router": "^1.169.1",
     "@tauri-apps/api": "^2.10.1",
